@@ -4,6 +4,7 @@ import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRig
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { db } from '../firebase.config'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
+import { toast } from "react-toastify"
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 
 function SignUp() {
@@ -45,7 +46,7 @@ function SignUp() {
 
       navigate('/')
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong with registration.')
     }
   }
   return(

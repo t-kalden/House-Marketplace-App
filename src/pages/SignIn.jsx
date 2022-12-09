@@ -4,6 +4,7 @@ import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRig
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { toast } from "react-toastify"
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
+import OAuth from "../components/OAuth"
 
 
 function SignIn() {
@@ -33,7 +34,7 @@ function SignIn() {
       if(userCredential.user) {
         navigate('/')
       }
-      toast('Successfully signed in')
+      toast.success('Successfully signed in')
     } catch (error) {
       toast.error('Username or password incorrect')
     }
@@ -73,7 +74,8 @@ function SignIn() {
         </div>
       </form>
 
-      {/* Google OAuth */}
+      <OAuth/>
+
       <Link to='/sign-up' className="registerLink">Sign Up Instead</Link>
     </div>
     </>

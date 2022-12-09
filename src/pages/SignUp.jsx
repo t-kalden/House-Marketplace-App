@@ -6,6 +6,7 @@ import { db } from '../firebase.config'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { toast } from "react-toastify"
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
+import OAuth from "../components/OAuth"
 
 function SignUp() {
   const [ showPassword, setShowPassword ] = useState(false)
@@ -45,7 +46,7 @@ function SignUp() {
       await setDoc(doc(db, 'users', user.uid), formDataCopy) 
 
       navigate('/')
-      toast('Successfully signed up')
+      toast.success('Successfully signed up')
     } catch (error) {
       toast.error('Something went wrong with registration.')
     }
@@ -89,7 +90,8 @@ function SignUp() {
         </div>
       </form>
 
-      {/* Google OAuth */}
+      <OAuth/>
+
       <Link to='/sign-in' className="registerLink">Sign In Instead</Link>
     </div>
     </>

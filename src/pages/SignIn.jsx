@@ -34,7 +34,7 @@ function SignIn() {
       if(userCredential.user) {
         navigate('/')
       }
-      toast.success('Successfully signed in')
+      toast.success(`Welcome back, ${userCredential.user.displayName}`)
     } catch (error) {
       toast.error('Username or password incorrect')
     }

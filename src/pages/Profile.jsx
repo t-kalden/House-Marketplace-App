@@ -19,6 +19,7 @@ function Profile() {
   const onLogOut = () => {
     auth.signOut()
     navigate('/')
+    toast.success('Successfully signed out! See you soon!')
   }
 
   const onSubmit = async () => {

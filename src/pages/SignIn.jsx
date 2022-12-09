@@ -5,6 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { toast } from "react-toastify"
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 
+
 function SignIn() {
   const [ showPassword, setShowPassword ] = useState(false)
   const [ formData, setFormData ] = useState({
@@ -32,6 +33,7 @@ function SignIn() {
       if(userCredential.user) {
         navigate('/')
       }
+      toast('Successfully signed in')
     } catch (error) {
       toast.error('Username or password incorrect')
     }

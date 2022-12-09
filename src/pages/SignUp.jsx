@@ -45,6 +45,7 @@ function SignUp() {
       await setDoc(doc(db, 'users', user.uid), formDataCopy) 
 
       navigate('/')
+      toast('Successfully signed up')
     } catch (error) {
       toast.error('Something went wrong with registration.')
     }

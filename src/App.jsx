@@ -8,7 +8,9 @@ import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import ForgotPassword from './pages/ForgotPassword'
 import PrivateRoutes from "./components/PrivateRoutes";
+import Category from "./pages/Category";
 import 'react-toastify/dist/ReactToastify.css'
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Routes>
             <Route path='/' element={ <Explore/> }/>
             <Route path='/offers' element={ <Offers/> }/>
+            <Route path='/category/:categoryName' element={ <Category/> }/>
             <Route path='profile' element={ <PrivateRoutes/> }>
               <Route path='/profile' element={ <Profile/> }/>
             </Route>

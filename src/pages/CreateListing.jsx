@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
+import { toast } from 'react-toastify'
 
 function CreateListing() {
     const [ geolocationEnabled, setGeolocationEnabled ] = useState(true)
@@ -48,10 +49,53 @@ function CreateListing() {
         }
     }, [isMounted])
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData);
+        setLoading(false)
+
+        if(discountedPrice >= regularPrice) {
+            setLoading(false)
+            toast.error('Discount price needs to be less than regular price')
+            return
+        }
+
+        if(images.length > 6) {
+            setLoading(false)
+            toast.error('Max images allowed is 6 images.')
+            return
+        }
+
+        let geolocation = {
+
+        }
+
+        let location
+
+        if(geolocationEnabled) {
+            const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
+            const data = await res.json()
+            // console.log(data);
+            // console.log(data.results[0]?.geometry.location.lat);
+        
+            geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
+            geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
+
+            location = 
+                data.status === 'ZERO_RESULTS' ? undefined 
+                    : data.results[0]?.formatted_address
+            
+            if(location === undefined || location.includes('undefined')) {
+                setLoading(false)
+                toast.error('Please enter a valid address')
+                return
+            }
+        } else {
+            geolocation.lat = latitude
+            geolocation.lng = longitude
+        }
     }
+
+
     const onMutate = (e) => {
         let bool = null
 
@@ -211,7 +255,7 @@ function CreateListing() {
                         required
                     />
                     {/* geolocation disabeled */}
-                    {!geolocationEnabled && (
+                    {/* {!geolocationEnabled && (
                         <div className='formLatLng flex'>
                         <div>
                           <label className='formLabel'>Latitude</label>
@@ -236,7 +280,7 @@ function CreateListing() {
                           />
                         </div>
                       </div>
-                    )}
+                    )} */}
 
                     {/* offer container */}
                     <label className='formLabel'>Offer</label>

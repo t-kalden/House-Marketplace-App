@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { resolvePath, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { toast } from 'react-toastify'
 
 import Spinner from '../components/Spinner'
-import { async } from '@firebase/util'
 
 function CreateListing() {
     const [ geolocationEnabled, setGeolocationEnabled ] = useState(true)
@@ -127,7 +127,7 @@ function CreateListing() {
             })
         }
 
-        const imgUrls = await Promise.all(
+        const imageUrls = await Promise.all(
             [...images].map((i) => storeImage(i))
         ).catch(() => {
             setLoading(false)
@@ -135,9 +135,31 @@ function CreateListing() {
             return
         })
 
-        console.log(imgUrls);
+        //copy of form data
+        const formDataCopy = {
+            ...formData,
+            imageUrls,
+            geolocation,
+            timestamp: serverTimestamp()
+        }
 
+        delete formDataCopy.images
+        delete formDataCopy.address
+
+        location && (formDataCopy.location = location)
+        !formDataCopy.offer && (delete formDataCopy.discountedPrice)
+
+        const docRef = await 
+            addDoc(
+                collection(db, 'listings'), 
+                    formDataCopy
+        )
         setLoading(false)
+
+        toast.success('Your listing has been added!')
+
+        navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+
     }
 
 

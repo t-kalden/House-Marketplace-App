@@ -6,6 +6,11 @@ import { getAuth } from "firebase/auth"
 import Spinner from "../components/Spinner"
 import shareIcon from '../assets/svg/shareIcon.svg'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/swiper-bundle.css'
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 function Listing() {
     const [ listing, setListing ] = useState(null)
@@ -33,7 +38,27 @@ function Listing() {
 
     return (loading) ? <Spinner/> : (
         <main>
-            {/* SLIDESHOW */}
+            <Swiper
+            slidesPerView={1}
+            pagination={{clickable: true}}
+            style={{width:'100%'}}
+            >
+                {
+                    listing.imageUrls.map((url, i) => (
+                        <SwiperSlide key={i}>
+                            <div 
+                                style={{
+                                    background:`url(${listing.imageUrls[i]}) center no-repeat`,
+                                    backgroundSize: 'cover',
+                                    minHeight: '300px',
+                                }}
+                                className="swiperSlideDiv"
+                                >
+                            </div>
+                        </SwiperSlide>
+                    )) 
+                }
+            </Swiper>
 
             <div className="shareIconDiv" onClick={() => {
                 navigator.clipboard.writeText(window.location.href)
@@ -99,7 +124,6 @@ function Listing() {
                         
                     </MapContainer>
                 </div>
-
                 {auth.currentUser?.uid !== listing.userRef &&(
                     <Link to={`/contact/${listing.userRef}?listingName=${listing.name}`} className='primaryButton' >
                         Contact Owner

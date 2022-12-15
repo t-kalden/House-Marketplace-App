@@ -347,33 +347,6 @@ function EditListing() {
                         onChange={ onMutate }
                         required
                     />
-                    {/* geolocation disabeled */}
-                    {/* {!geolocationEnabled && (
-                        <div className='formLatLng flex'>
-                        <div>
-                          <label className='formLabel'>Latitude</label>
-                          <input
-                            className='formInputSmall'
-                            type='number'
-                            id='latitude'
-                            value={latitude}
-                            onChange={onMutate}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className='formLabel'>Longitude</label>
-                          <input
-                            className='formInputSmall'
-                            type='number'
-                            id='longitude'
-                            value={longitude}
-                            onChange={onMutate}
-                            required
-                          />
-                        </div>
-                      </div>
-                    )} */}
 
                     {/* offer container */}
                     <label className='formLabel'>Offer</label>

@@ -23,3 +23,8 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Project Snapshots
+
+### Home/Explore
+
+![Alt Text] (/public/house-marketplace-app/home-page.png)

@@ -18,17 +18,19 @@ This MERN house marketplace focuses on creating, displaying and authenticating d
 ### Sale
 ![Alt text](./public/house-marketplace-app/sale.png)
 
+### Listing
+![Alt text](./public/house-marketplace-app/listing-page.png)
+
+### Create Listing
+![Alt text](./public/house-marketplace-app/create-listing-page.png) 
+
 ### Sign-in
 ![Alt text](./public/house-marketplace-app/sign-in-page.png)
 
 ### Profile
 ![Alt text](./public/house-marketplace-app/profile.png)
 
-### Listing
-![Alt text](./public/house-marketplace-app/listing-page.png)
 
-### Create Listing
-![Alt text](./public/house-marketplace-app/Create-listing-page.png)
 
 ## Available Scripts
 ### `npm start`

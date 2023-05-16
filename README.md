@@ -27,4 +27,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Home/Explore
 
-![Alt Text] (/public/house-marketplace-app/home-page.png)
+![Alt Text] (public/house-marketplace-app/home-page.png)
